@@ -5,4 +5,4 @@
 
 ## gh-pages
 
-- https://htl-leonding-college.github.io/android-jetpack-compose
+- https://htl-leonding-college.github.io/2021-android-jetpack-compose/

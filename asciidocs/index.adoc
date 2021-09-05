@@ -13,9 +13,9 @@ ifndef::imagesdir[:imagesdir: images]
 ifdef::backend-html5[]
 
 // https://fontawesome.com/v4.7.0/icons/
-icon:file-text-o[link=https://raw.githubusercontent.com/htl-leonding-college/asciidoctor-docker-template/master/asciidocs/{docname}.adoc]
-icon:github-square[link=https://github.com/htl-leonding-college/quarkus-curriculum]
-icon:home[link=https://htl-leonding.github.io/]
+icon:file-text-o[link=https://raw.githubusercontent.com/htl-leonding-college/2021-android-jetpack-compose/main/asciidocs/{docname}.adoc, window="_blank"]
+icon:github-square[link=https://github.com/htl-leonding-college/2021-android-jetpack-compose, window="_blank"]
+icon:home[link=https://bit.ly/htl-leonding]
 endif::backend-html5[]
 
 // print the toc here (not at the default position)
@@ -23,15 +23,17 @@ endif::backend-html5[]
 
 == Resources
 
-* https://developer.android.com/jetpack/compose[Home]
-* https://developer.android.com/jetpack/compose/tutorial[Jetpack Compose Tutorial] (Simple UI)
-* https://developer.android.com/courses/pathways/compose[Jetpack Compose] (pathway)
-* https://developer.android.com/jetpack/compose/documentation[Documentation]
-* https://developer.android.com/codelabs/jetpack-compose-migration#0[Learn how to combine Compose and View-based UIs] (Codelab)
-* https://codelabs.developers.google.com/s/results?q=jetpack%20compose[Codelabs for Jetpack Compose]
-* https://flatteredwithflutter.com/using-room-in-jetpack-compose/[Using Room in Jetpack Compose] ???
+* https://developer.android.com/jetpack/compose[Home, window="_blank"]
+* https://developer.android.com/jetpack/compose/tutorial[Jetpack Compose Tutorial, window="_blank"] (Simple UI)
+* https://developer.android.com/courses/pathways/compose[Jetpack Compose, window="_blank"] (pathway)
+* https://developer.android.com/jetpack/compose/documentation[Documentation, window="_blank"]
+* https://developer.android.com/codelabs/jetpack-compose-migration#0[Learn how to combine Compose and View-based UIs, window="_blank"] (Codelab)
+* https://codelabs.developers.google.com/s/results?q=jetpack%20compose[Codelabs for Jetpack Compose, window="_blank"]
+* https://flatteredwithflutter.com/using-room-in-jetpack-compose/[Using Room in Jetpack Compose, window="_blank"] ???
 
 == Bascis
+
+* We begin with "Tutorial: Jetpack Compose basics" in the https://developer.android.com/courses/pathways/compose[pathway, window="_blank"].
 
 * The @Composable annotation is necessary just for functions which emit UI or call other composable functions.
 They can call both regular and other composable functions.
@@ -140,6 +142,9 @@ fun MyScreenContent(names: List<String> = listOf("Android", "there")) {
 }
 ----
 
+
+=== Source of truth
+
 ==== Excursus: https://kotlinlang.org/docs/basic-types.html#string-templates[String templates, window="_blank"]
 
 * String literals may contain template expressions - pieces of code that are evaluated and whose results are concatenated into the string. A template expression starts with a dollar sign ($) and consists of either a name:
@@ -162,13 +167,98 @@ println("$s.length is ${s.length}") // prints "abc.length is 3"
 
 
 
-=== Source of truth
+
 
 IMPORTANT: In Composable functions, state that can be useful to calling functions should be exposed because it's the only way it can be consumed or controlled—this process is called *state hoisting*.
 
 * State hoisting is the way to make internal state controllable by the function that called it. You do so by exposing the state through a parameter of the controlled composable function and instantiating it externally from the controlling composable. Making state hoistable avoids duplicating state and introducing bugs, helps reuse composables, and makes composables substantially easier to test. State that is not interesting to a composable caller should be internal.
 
 
+
+[source,kotlin]
+----
+
+----
+
+
+
+
+
+
+[source,kotlin]
+----
+
+----
+
+
+
+
+
+
+[source,kotlin]
+----
+
+----
+
+
+
+
+
+
+[source,kotlin]
+----
+
+----
+
+
+
+
+
+
+[source,kotlin]
+----
+
+----
+
+
+
+
+
+
+[source,kotlin]
+----
+
+----
+
+
+
+
+
+
+[source,kotlin]
+----
+
+----
+
+
+
+
+
+
+[source,kotlin]
+----
+
+----
+
+
+
+
+
+
+[source,kotlin]
+----
+
+----
 
 
 
