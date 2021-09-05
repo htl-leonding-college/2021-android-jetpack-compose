@@ -1,0 +1,175 @@
+= android - jetpack compose
+Thomas W. Stütz
+1.0.0, 2021-09-01
+ifndef::imagesdir[:imagesdir: images]
+//:toc-placement!:  // prevents the generation of the doc at this position, so it can be printed afterwards
+:sourcedir: ../src/main/java
+:icons: font
+//:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
+:toclevels: 5
+:sectnums:
+//Need this blank line after ifdef, don't know why...
+ifdef::backend-html5[]
+
+// https://fontawesome.com/v4.7.0/icons/
+icon:file-text-o[link=https://raw.githubusercontent.com/htl-leonding-college/asciidoctor-docker-template/master/asciidocs/{docname}.adoc]
+icon:github-square[link=https://github.com/htl-leonding-college/quarkus-curriculum]
+icon:home[link=https://htl-leonding.github.io/]
+endif::backend-html5[]
+
+// print the toc here (not at the default position)
+//toc::[]
+
+== Resources
+
+* https://developer.android.com/jetpack/compose[Home]
+* https://developer.android.com/jetpack/compose/tutorial[Jetpack Compose Tutorial] (Simple UI)
+* https://developer.android.com/courses/pathways/compose[Jetpack Compose] (pathway)
+* https://developer.android.com/jetpack/compose/documentation[Documentation]
+* https://developer.android.com/codelabs/jetpack-compose-migration#0[Learn how to combine Compose and View-based UIs] (Codelab)
+* https://codelabs.developers.google.com/s/results?q=jetpack%20compose[Codelabs for Jetpack Compose]
+* https://flatteredwithflutter.com/using-room-in-jetpack-compose/[Using Room in Jetpack Compose] ???
+
+== Bascis
+
+* The @Composable annotation is necessary just for functions which emit UI or call other composable functions.
+They can call both regular and other composable functions.
+If a function doesn't meet these requirements, it shouldn't be annotated with @Composable.
+
+
+=== Container Functions
+
+* To make a generic container, create a Composable function that takes as a parameter a Composable function (here called `content`) which returns `Unit`. You return `Unit` because, as you might have noticed, Composable functions don't return UI components, they emit them. That's why they must return `Unit` :
++
+[source,kotlin]
+----
+@Composable
+fun MyApp(content: @Composable () -> Unit) {
+  BasicsCodelabTheme {
+    Surface(color = Color.Yellow) {
+      content()
+    }
+  }
+}
+----
+
+
+* Watch out for the extra parentheses in @Composable() when using a Composable function as a parameter. Since the annotation is applied on a function, they're needed!
++
+[source,kotlin]
+----
+fun MyApp(content: @Composable () -> Unit) { ... }
+----
+
+* Inside your function, you define all of the shared configuration you want your container to provide and then invoke the passed children Composable. In this case, you want to apply a `MaterialTheme` and a yellow surface, and then call `content()`.
+
+
+
+=== Column
+
+* To place items in a vertical sequence, use the `Column` Composable function (similar to a vertical `LinearLayout`).
++
+[source,kotlin]
+----
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Divider
+...
+
+@Composable
+fun MyScreenContent() {
+  Column {
+    Greeting("Android")
+    Divider(color = Color.Black)
+    Greeting("there")
+  }
+}
+----
+
+* Divider is a provided composable function that creates a horizontal divider.
+
+
+=== Compose and Kotlin
+
+* Compose functions can be called like any other function in Kotlin.
+This makes building UIs really powerful since you can add statements to influence how the UI will be displayed.
+
+* For example, you can use a for loop to add elements to the MyScreenContent Column:
++
+[source,kotlin]
+----
+@Composable
+fun MyScreenContent(names: List<String> = listOf("Android", "there")) {
+  Column {
+    for (name in names) {
+      Greeting(name = name)
+      Divider(color = Color.Black)
+    }
+  }
+}
+----
+
+
+
+== State in Compose
+
+* Reacting to state changes is at the very heart of Compose. Compose apps transform data into UI by calling Composable functions.
+If your data changes, you recall these functions with the new data, creating an updated UI.
+
+IMPORTANT: Compose offers tools for observing changes in your app's data, which will automatically recall your functions - this is called *recomposing*.
+
+* Compose also looks at what data is needed by an individual composable so that it only needs to recompose components whose data has changed and can skip composing those that are not affected.
+
+
+* Since Button reads count.value, Button will be recomposed whenever it changes and will display the new value of count.
+
+* You now can add a Counter to your screen:
++
+[source,kotlin]
+----
+@Composable
+fun MyScreenContent(names: List<String> = listOf("Android", "there")) {
+  Column {
+    for (name in names) {
+      Greeting(name = name)
+      Divider(color = Color.Black)
+    }
+    Divider(color = Color.Transparent, thickness = 32.dp)
+    Counter()
+  }
+}
+----
+
+==== Excursus: https://kotlinlang.org/docs/basic-types.html#string-templates[String templates, window="_blank"]
+
+* String literals may contain template expressions - pieces of code that are evaluated and whose results are concatenated into the string. A template expression starts with a dollar sign ($) and consists of either a name:
++
+[source,kotlin]
+----
+val i = 10
+
+println("i = $i") // prints "i = 10"
+----
++
+or an expression in curly braces:
++
+[source,kotlin]
+----
+val s = "abc"
+
+println("$s.length is ${s.length}") // prints "abc.length is 3"
+----
+
+
+
+=== Source of truth
+
+IMPORTANT: In Composable functions, state that can be useful to calling functions should be exposed because it's the only way it can be consumed or controlled—this process is called *state hoisting*.
+
+* State hoisting is the way to make internal state controllable by the function that called it. You do so by exposing the state through a parameter of the controlled composable function and instantiating it externally from the controlling composable. Making state hoistable avoids duplicating state and introducing bugs, helps reuse composables, and makes composables substantially easier to test. State that is not interesting to a composable caller should be internal.
+
+
+
+
+
+
