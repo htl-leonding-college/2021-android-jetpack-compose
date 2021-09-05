@@ -21,6 +21,15 @@ endif::backend-html5[]
 // print the toc here (not at the default position)
 //toc::[]
 
+== Curriculum
+
+* Create a simple Android App, with:
+** forms
+** lists
+** databases
+** access to an restful endpoint
+
+
 == Resources
 
 * https://developer.android.com/jetpack/compose[Home, window="_blank"]
