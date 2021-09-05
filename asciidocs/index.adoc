@@ -13,9 +13,9 @@ ifndef::imagesdir[:imagesdir: images]
 ifdef::backend-html5[]
 
 // https://fontawesome.com/v4.7.0/icons/
-icon:file-text-o[link=https://raw.githubusercontent.com/htl-leonding-college/asciidoctor-docker-template/master/asciidocs/{docname}.adoc]
-icon:github-square[link=https://github.com/htl-leonding-college/quarkus-curriculum]
-icon:home[link=https://htl-leonding.github.io/]
+icon:file-text-o[link=https://raw.githubusercontent.com/htl-leonding-college/2021-android-jetpack-compose/main/asciidocs/{docname}.adoc]
+icon:github-square[link=https://github.com/htl-leonding-college/2021-android-jetpack-compose]
+icon:home[link=https://htl-leonding-college.github.io/2021-android-jetpack-compose/]
 endif::backend-html5[]
 
 // print the toc here (not at the default position)
